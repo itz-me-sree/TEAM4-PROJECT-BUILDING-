@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueueFlow Pro | Control Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="mesh-bg"></div>
+    <div class="blob"></div>
+    <div class="blob-2"></div>
+    <div id="toast-container"></div>
+
+    <div class="container" style="margin-top: 2rem;">
+        <nav id="main-nav">
+            <a href="#" class="nav-link" onclick="window.location.href='../Member1_Home/index.html'">Home</a>
+            <a href="#" class="nav-link" onclick="window.location.href='../Member2_Portal/index.html'">Token Portal</a>
+            <a href="#" class="nav-link active" data-view="admin">Control Panel</a>
+            <a href="#" class="nav-link" data-view="lobby">Public Display</a>
+        </nav>
+
+        <!-- Admin View -->
+        <section id="admin-view" class="view-section view-active">
+            <header
+                style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <h1>Institutional Control</h1>
+                <div class="glass-card"
+                    style="padding: 0.75rem 1.5rem; border-radius: 14px; display: flex; gap: 1rem; align-items: center;">
+                    <span style="font-weight: 800;">COUNTER:</span>
+                    <select id="counter-select"
+                        style="background: transparent; border: 1px solid var(--glass-border); padding: 0.25rem 0.5rem; border-radius: 8px; font-weight: 700;">
+                        <option value="1">Desk 01</option>
+                        <option value="2">Desk 02</option>
+                        <option value="3">Desk 03</option>
+                        <option value="4">Desk 04</option>
+                        <option value="5">Desk 05</option>
+                    </select>
+                </div>
+            </header>
+
+            <div style="display: grid; grid-template-columns: 1fr 380px; gap: 2rem;">
+                <div class="glass-card" style="text-align: center;">
+                    <h3 style="color: var(--text-secondary);">Now Serving at This Desk</h3>
+                    <div id="serving-token"
+                        style="font-size: 8rem; font-weight: 800; margin: 4rem 0; color: var(--accent-primary);">--
+                    </div>
+                    <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                        <button class="accent" style="padding: 1.5rem 3.5rem; font-size: 1.25rem;"
+                            onclick="callNext()">CALL NEXT GUEST</button>
+                        <button class="secondary" style="padding: 1.5rem;" onclick="repeatCall()"><i
+                                data-lucide="volume-2"></i></button>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="padding: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem;">Waiting List</h3>
+                    <div id="admin-queue-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <!-- Queue items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lobby View (Public Display) -->
+        <section id="lobby-view" class="view-section" style="max-width: 1400px; margin: 0 auto;">
+            <div
+                style="background: var(--text-primary); color: white; padding: 2rem; border-radius: 28px; text-align: center; margin-bottom: 3rem; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+                <h1 style="font-size: 5rem; color: white; background: none; -webkit-text-fill-color: white;">NOW SERVING
+                </h1>
+            </div>
+
+            <div id="lobby-serving-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem;">
+                <!-- Servicing counters -->
+            </div>
+
+            <div
+                style="margin-top: 5rem; background: var(--card-bg); padding: 2.5rem; border-radius: 28px; border: 1px solid var(--glass-border);">
+                <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                    <i data-lucide="list-ordered"></i> Upcoming Tokens
+                </h2>
+                <div id="lobby-waiting-list"
+                    style="display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; scrollbar-width: thin;">
+                    <!-- Wait list -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Auth Modal (Simplified for Staff Login) -->
+    <div id="modal-overlay" class="modal-overlay" onclick="closeAllModals()">
+        <div id="auth-modal" class="glass-card modal-content" onclick="event.stopPropagation()">
+            <div id="login-form" class="auth-form">
+                <h2>Staff Login</h2>
+                <p style="margin-bottom: 2rem; color: var(--text-secondary);">Access Queue Control.</p>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="login-email" placeholder="staff@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-pass" placeholder="••••••••">
+                </div>
+                <button class="accent" style="width: 100%;" onclick="handleLogin()">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="main.js"></script>
+</body>
+
+</html>
